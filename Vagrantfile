@@ -68,15 +68,19 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
     sudo apt-get upgrade
-    sudo apt-get install -y apache2 git php5 php5-dev php5-xdebug php-pear sshpass
+    sudo apt-get install -y git php5 php5-dev php5-curl php-pear default-jre
 
     echo "Installing Composer..."
     curl -sS https://getcomposer.org/installer | php
-    sudo mv composer.phar /usr/local/bin
+    sudo mv composer.phar /usr/local/bin/composer
     echo "Done installing Composer..."
 
-    echo "Configuring Git..."
-    git config --global credential.helper "cache --timeout=86400"
-    echo "Done configuring Git..."
+    echo "Installing Behat project dependencies"
+    cd /vagrant; composer install;
+    echo "Done installing Behat project dependencies"
+
+    echo "Updating cli php.ini to ignore E_USER_DEPRECATED messages"
+    sed -i '/^error_reporting/s/$/ \& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
+    echo "Done updating cli php.ini"
   SHELL
 end

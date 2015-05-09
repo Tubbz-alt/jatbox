@@ -1,4 +1,17 @@
 #!/usr/bin/env sh
+
+# Added by JAT-Box project: Run Selenium Server as a background process before
+# running tests if Selenium Server is not already running
+SEL_JOB_COUNT="$(ps -f | grep java.*jar.*selenium-server | wc -l)"
+echo $SEL_JOB_COUNT
+if [ "$SEL_JOB_COUNT" = "0" ]
+    then
+        echo "Starting Selenium Server hub"
+        java -jar selenium-server-standalone-2.45.0.jar -role hub &
+    else
+        echo "Selenium Server hub is running, won't attempt to start"
+fi
+
 SRC_DIR="`pwd`"
 cd "`dirname "$0"`"
 cd '../vendor/behat/behat/bin'
