@@ -80,7 +80,7 @@ Vagrant.configure(2) do |config|
     echo "Done installing Behat project dependencies"
 
     echo "Updating cli php.ini to ignore E_USER_DEPRECATED messages"
-    sed -i '/^error_reporting/s/$/ \& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
+    sed -i '/^error_reporting/s/$/ \\& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
     echo "Done updating cli php.ini"
   SHELL
 end
