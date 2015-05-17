@@ -1,0 +1,20 @@
+##
+# This file is part of the JAT-Box project
+#
+# hub: Checks whether Selenium Server is already running on this machine in
+# hub mode, and starts it if not. You shouldn't ever need to start this script
+# manually, because it is run when bin/behat is run.
+#
+# This is the script that needs to run on the MASTER machine (the Vagrant VM),
+# see ../node for the script the needs to run on the SLAVE machine
+################################################################################
+DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+SEL_JOB_COUNT="$(ps -f | grep java.*jar.*selenium-server.*hub | grep -v grep | wc -l)"
+if [ "$SEL_JOB_COUNT" = "0" ]
+    then
+        echo "Starting Selenium Server hub"
+        cd ${DIR}
+        java -jar selenium-server-standalone-2.45.0.jar -role hub
+    else
+        echo "Selenium Server hub is already running, won't attempt to start"
+fi
