@@ -82,5 +82,9 @@ Vagrant.configure(2) do |config|
     echo "Updating cli php.ini to ignore E_USER_DEPRECATED messages"
     sed -i '/^error_reporting/s/$/ \\& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
     echo "Done updating cli php.ini"
+
+    echo "Forcing Git to update to fix a line-ending problem that can be caused by the JAT-Box project being checked out in Windows"
+    cd /vagrant/jatbox; git reset --hard HEAD
+    echo "Done with line-ending fix"
   SHELL
 end
