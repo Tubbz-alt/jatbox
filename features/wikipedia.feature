@@ -1,7 +1,10 @@
+# These tests are put here as examples to help you get started, and also
+# to allow you to confirm that your JAT-Box installation was successful.
+
 Feature: Search
-  In order to see a word definition
-  As a website user
-  I need to be able to search for a word
+  In order to confirm that the JAT-Box has installed correctly
+  As a test developer
+  I need to run a few dummy tests against Wikipedia
 
   Scenario: Searching for a page that does exist
     Given I am on "/wiki/Main_Page"
