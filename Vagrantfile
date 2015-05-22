@@ -84,7 +84,7 @@ Vagrant.configure(2) do |config|
     echo "Done updating cli php.ini"
 
     echo "Forcing Git to update to fix a line-ending problem that can be caused by the JAT-Box project being checked out in Windows"
-    cd /vagrant/jatbox; git reset --hard HEAD
+    cd /vagrant; git reset --hard HEAD
     echo "Done with line-ending fix"
   SHELL
 end
