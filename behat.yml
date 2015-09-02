@@ -1,9 +1,18 @@
 default:
-    extensions:
-        Behat\MinkExtension\Extension:
-            base_url: http://www.wikipedia.org
-            goutte: ~
-            selenium2:
-                capabilities:
-                    browser: firefox,
-                    version: ""
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: http://badger.pnl.gov
+      default_session: selenium2
+      browser_name: chrome
+      selenium2:
+        capabilities: { "browser": "chrome", "version": "" }
+
+firefox:
+  extensions:
+    Behat\MinkExtension\Extension:
+      browser_name: firefox
+  
+ie:
+  extensions:
+    Behat\MinkExtension\Extension:
+      browser_name: internet explorer
