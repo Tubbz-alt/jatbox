@@ -14,7 +14,7 @@ if [ "$SEL_JOB_COUNT" = "0" ]
     then
         echo "Starting Selenium Server hub"
         cd ${DIR}
-        java -jar selenium-server-standalone-2.45.0.jar -role hub
+        java -jar selenium-server-standalone-2.45.0.jar -role hub -maxInstances 5 -maxSession 6
     else
         echo "Selenium Server hub is already running, won't attempt to start"
 fi
