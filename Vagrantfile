@@ -87,5 +87,9 @@ Vagrant.configure(2) do |config|
     echo "Forcing Git to update to fix a line-ending problem that can be caused by the JAT-Box project being checked out in Windows"
     cd /vagrant; git reset --hard HEAD
     echo "Done with line-ending fix"
+
+    echo "Setting behat permissions"
+    chmod u+x /vagrant/vendor/behat/behat/bin/*
+    echo "Done setting permissions"
   SHELL
 end

@@ -10,7 +10,7 @@
 ################################################################################
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 SEL_JOB_COUNT="$(ps -f | grep java.*jar.*selenium-server.*hub | grep -v grep | wc -l)"
-if [ "$SEL_JOB_COUNT" = "0" ]
+if [ $SEL_JOB_COUNT = 0 ]
     then
         echo "Starting Selenium Server hub"
         cd ${DIR}
