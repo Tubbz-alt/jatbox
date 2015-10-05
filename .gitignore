@@ -2,3 +2,5 @@ vendor/
 vendor/*
 .vagrant/
 .vagrant/*
+.idea/
+.idea/*

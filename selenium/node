@@ -14,7 +14,7 @@ if [ $SEL_JOB_COUNT = 0 ]
     then
         echo "Starting Selenium Server node"
         cd ${DIR}
-        java -jar selenium-server-standalone-2.45.0.jar -role node -hub http://${HUB_IP}:${HUB_PORT}/grid/register
+        java -jar selenium-server-standalone-2.47.1.jar -role node -hub http://${HUB_IP}:${HUB_PORT}/grid/register
     else
-        echo "Selenium Server hub is already running, won't attempt to start"
+        echo "Selenium Server node is already running, won't attempt to start"
 fi
