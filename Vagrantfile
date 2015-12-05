@@ -69,7 +69,8 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     sudo apt-get update
     sudo apt-get upgrade
-    sudo apt-get install -y git php5 php5-dev php5-curl php-pear default-jre
+    sudo apt-get install -y git php5 php5-dev php5-curl php-pear default-jre   \
+      parallel
 
     echo "Installing Composer..."
     curl -sS https://getcomposer.org/installer | php
