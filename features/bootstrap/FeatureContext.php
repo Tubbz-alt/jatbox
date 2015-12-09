@@ -21,6 +21,10 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     }
 
     /**
+     * Used by the Wikipedia demo test to wait for the dropdown suggestion
+     * box to appear when text has been typed into the search bar. This
+     * is probably not useful in real tests and can be safely deleted.
+     *
      * @Given /^I wait for the suggestion box to appear$/
      */
     public function iWaitForTheSuggestionBoxToAppear()
