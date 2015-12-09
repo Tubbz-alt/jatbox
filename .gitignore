@@ -1,6 +1,5 @@
 vendor/
-vendor/*
 .vagrant/
-.vagrant/*
 .idea/
-.idea/*
+reports/*
+!reports/README.md

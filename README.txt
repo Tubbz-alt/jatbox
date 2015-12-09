@@ -19,3 +19,9 @@ Quick Start
   b) Less recommended - open multiple SSH connections to your VM
 7) FROM WINDOWS: run selenium/node from cmd (the hub calls this to fulfill browser requests)
 8) FROM SSH: run ./bin/behat
+
+
+TODO List
+=========
+- Split the Selenium Grid configuration from the default configuration instead
+  of having both in one big file
