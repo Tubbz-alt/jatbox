@@ -51,8 +51,6 @@ default:
           # The version of the browser to be tested.
           version: "ANY"
 
-          browserVersion: "ANY"
-
 # Selenium Grid profiles: There is one profile here for every OS/browser
 # combination supported by the PNNL Selenium Grid. Don't forget to comment in
 # the wd_host line in the default profile above if you want to use the Grid!
