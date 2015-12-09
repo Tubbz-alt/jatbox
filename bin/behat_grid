@@ -11,6 +11,8 @@ TIMESTAMP=`date | sed -e 's/ /_/g' | sed -e 's/://g'`
 
 REPORTS_TEMP_DIR=reports/${TIMESTAMP}
 
+mkdir ${REPORTS_TEMP_DIR}
+
 # cat -> Gets the contents of the behat configuration
 # grep -> Filters just the lines containing the @SeleniumGrid annotation
 # cut -> Discards the colon and everything after from the matched lines
