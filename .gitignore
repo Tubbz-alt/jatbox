@@ -3,3 +3,5 @@ vendor/
 .idea/
 reports/*
 !reports/README.md
+screenshots/
+!screenshots/README.md
