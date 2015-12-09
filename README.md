@@ -3,10 +3,9 @@ JAT-Box
 Authors: Benjamin Stuermer (benjamin.stuermer@pnnl.gov), Tom Schultz (tom.schultz@pnnl.gov), Hunter Stratton (hunter.stratton@pnnl.gov)
 July, 2015
 
-The JAT-Box (Just Add Tests) is a preconfigured Behat Vagrant virtual machine.
+The JAT (Just Add Tests) Box is a preconfigured Behat Vagrant virtual machine.
 
 
-======
 Quick Start
 ======
 1) Install VirtualBox, Vagrant, Putty, and Chrome
