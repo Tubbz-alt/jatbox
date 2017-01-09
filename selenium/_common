@@ -1,0 +1,33 @@
+#!/usr/bin/env bash
+
+###
+# Start a Selenium Server instance.
+# @param $1 "node" or "hub" - determines the role in which the Selenium Server will be launched. The Hub is the master
+#    instance, and Nodes are registered to it and run browser-based tests
+###
+function launch-selenium-server(){
+    HUB_IP=192.168.33.11 # This should be the same as the IP address configured in the private_network configuration line of Vagrantfile
+    HUB_PORT=4444 # 4444 is the default port for the server to listen on and shouldn't need to be changed
+    DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) # The directory in which this script file is stored
+
+    ROLE=$1
+    if [ "$ROLE" == "hub" ]; then
+        NODE_ARGS=""
+    elif [ "$ROLE" == "node" ]; then
+        NODE_ARGS="-hub http://${HUB_IP}:${HUB_PORT}/grid/register"
+	else
+	    echo "launch-selenium-server() must be passed 'hub' or 'node' as 1st argument"
+	    return 1
+	fi
+
+    # SEL_JOB_COUNT will be 1 if Selenium Server is already running in the requested role on this machine
+    SEL_JOB_COUNT="$(ps -f | grep java.*jar.*selenium-server.*${ROLE} | grep -v grep | wc -l)"
+
+    if [ ${SEL_JOB_COUNT} != 0 ]; then
+        echo "Selenium Server hub is already running, won't attempt to start"
+        return 1
+    fi
+
+    echo "Launching Selenium Server $ROLE"
+    java -jar ${DIR}/selenium-server-standalone-2.53.1.jar -role ${ROLE} -maxInstances 5 -maxSession 6 ${NODE_ARGS}
+}
