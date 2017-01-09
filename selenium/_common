@@ -29,5 +29,5 @@ function launch-selenium-server(){
     fi
 
     echo "Launching Selenium Server $ROLE"
-    java -jar ${DIR}/selenium-server-standalone-2.53.1.jar -role ${ROLE} -maxInstances 5 -maxSession 6 ${NODE_ARGS}
+    java -jar ${DIR}/selenium-server-standalone-3.0.1.jar -role ${ROLE} -maxInstances 5 -maxSession 6 ${NODE_ARGS}
 }
