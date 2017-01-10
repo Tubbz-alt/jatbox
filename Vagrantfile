@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
+  config.vm.box = "ubuntu/xenial64"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -49,7 +49,7 @@ Vagrant.configure(2) do |config|
     # vb.gui = true
   
     # Customize the amount of memory on the VM:
-    vb.memory = "1024"
+    vb.memory = "2048"
     vb.cpus = 4
   end
   
@@ -69,10 +69,7 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get update
-    sudo apt-get upgrade
-    sudo apt-get install -y git php5 php5-dev php5-curl php-pear default-jre   \
-      parallel
+    sudo apt-get install -y php php-dev php-curl php-pear php-mbstring default-jre parallel
 
     echo "Installing Composer..."
     curl -sS https://getcomposer.org/installer | php
@@ -80,19 +77,15 @@ Vagrant.configure(2) do |config|
     echo "Done installing Composer..."
 
     echo "Installing Behat project dependencies"
-    cd /vagrant; composer install;
+    cd /vagrant; su ubuntu -c "composer install";
     echo "Done installing Behat project dependencies"
 
-    echo "Updating cli php.ini to ignore E_USER_DEPRECATED messages"
-    sed -i '/^error_reporting/s/$/ \\& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
-    echo "Done updating cli php.ini"
+#    echo "Updating cli php.ini to ignore E_USER_DEPRECATED messages"
+#    sed -i '/^error_reporting/s/$/ \\& ~E_USER_DEPRECATED/' /etc/php5/cli/php.ini
+#    echo "Done updating cli php.ini"
 
-    echo "Forcing Git to update to fix a line-ending problem that can be caused by the JAT-Box project being checked out in Windows"
-    cd /vagrant; git reset --hard HEAD
-    echo "Done with line-ending fix"
-
-    echo "Setting behat permissions"
-    chmod u+x /vagrant/vendor/behat/behat/bin/*
-    echo "Done setting permissions"
+#    echo "Setting behat permissions"
+#    chmod u+x /vagrant/vendor/behat/behat/bin/*
+#    echo "Done setting permissions"
   SHELL
 end

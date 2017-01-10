@@ -1,14 +1,20 @@
 <?php
 
-use \Behat\Behat\Event\BaseScenarioEvent;
-use \Behat\Behat\Event\OutlineExampleEvent;
-use \Behat\Behat\Event\ScenarioEvent;
+use \Behat\Behat\Hook\Scope\AfterScenarioScope;
+use \Behat\Testwork\Tester\Result\TestResult;
 
 /**
  * Features context.
  */
 class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
 {
+    /**
+     * The path to the folder in which screenshots are to be stored
+     *
+     * @var string
+     */
+    protected $screenshotFolder;
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.
@@ -38,15 +44,15 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
     /**
      * Take a screenshot of failed tests to assist in debugging.
      * @AfterScenario
-     * @param BaseScenarioEvent $event
+     * @param AfterScenarioScope $event
      */
-    public function generateScreenshotOnError(BaseScenarioEvent $event)
+    public function generateScreenshotOnError(AfterScenarioScope $event)
     {
         // If the result is an error...
-        if (4 == $event->getResult()) {
+        if ($event->getTestResult()->getResultCode() == TestResult::FAILED) {
             $profileName = $this->getCurrentProfileName();
-            $featureTitle = $this->getFeatureTitle($event);
-            $scenarioTitle = $this->getScenarioTitle($event);
+            $featureTitle = $event->getFeature()->getTitle();
+            $scenarioTitle = $event->getScenario()->getTitle();
             $filename = $this->screenshotFolder . DIRECTORY_SEPARATOR . "$scenarioTitle.$featureTitle.$profileName.jpg";
             if (!file_exists($this->screenshotFolder)) {
                 mkdir($this->screenshotFolder, 0755, true);
@@ -62,38 +68,6 @@ class FeatureContext extends \Behat\MinkExtension\Context\MinkContext
                 // Goutte that don't have the facility to generate screenshots
             }
         }
-    }
-
-    /**
-     * Get the title of the event
-     * @param BaseScenarioEvent $event
-     * @return string
-     * @throws Exception if event type is not handled
-     */
-    public function getScenarioTitle(BaseScenarioEvent $event) {
-        if (method_exists($event, 'getScenario'))
-            return $event->getScenario()->getTitle();
-        if ($event instanceof OutlineExampleEvent) {
-            $outlineTitle = $event->getOutline()->getTitle();
-            $outlineIteration = $event->getIteration();
-            return "$outlineTitle $outlineIteration";
-        }
-        throw new Exception("Unknown event type " . get_class($event));
-    }
-
-    /**
-     * Get the title of the feature containing the event
-     * @param BaseScenarioEvent $event
-     * @return string
-     * @throws Exception if event type is not handled
-     */
-    public function getFeatureTitle(BaseScenarioEvent $event) {
-        if ($event instanceof ScenarioEvent)
-            return $event->getScenario()->getFeature()->getTitle();
-        if ($event instanceof OutlineExampleEvent) {
-            return $event->getOutline()->getFeature()->getTitle();
-        }
-        throw new Exception("Unknown event type " . get_class($event));
     }
 
     /**
