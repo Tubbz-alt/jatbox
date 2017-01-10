@@ -62,7 +62,7 @@ default:
 # combination supported by the PNNL Selenium Grid. Don't forget to comment in
 # the wd_host line in the default profile above if you want to use the Grid!
 #
-# You can use the scripts in bin/selenium_grid/ to run your tests using all of
+# You can use the script bin/behat_grid to run your tests using all of
 # these profiles in parallel. The "SeleniumGrid" annotation is the key to this
 # behavior - add that annotation to a profile to have it run together with the
 # other profiles, or remove it to prevent it from being tested.
