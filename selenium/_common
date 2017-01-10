@@ -13,8 +13,10 @@ function launch-selenium-server(){
     ROLE=$1
     if [ "$ROLE" == "hub" ]; then
         NODE_ARGS=""
+        DRIVERS=""
     elif [ "$ROLE" == "node" ]; then
         NODE_ARGS="-hubHost ${HUB_IP} -hubPort ${HUB_PORT}"
+        DRIVERS="-Dwebdriver.gecko.driver=${DIR}/geckodriver_mac.exe"
 	else
 	    echo "launch-selenium-server() must be passed 'hub' or 'node' as 1st argument"
 	    return 1
@@ -29,5 +31,5 @@ function launch-selenium-server(){
     fi
 
     echo "Launching Selenium Server $ROLE"
-    java -jar ${DIR}/selenium-server-standalone-3.0.1.jar -role ${ROLE} ${NODE_ARGS}
+    java ${DRIVERS} -jar ${DIR}/selenium-server-standalone-3.0.1.jar -role ${ROLE} ${NODE_ARGS}
 }
