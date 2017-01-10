@@ -16,8 +16,7 @@ if($RUNNING)
 {
 	"Starting Selenium Server node"
 	cd $DIR
-	java -jar selenium-server-standalone-3.0.1.jar -role node -hub http://${HUB_IP}:${HUB_PORT}/grid/register '-browser browserName=internet explorer,maxInstances=5' '-Dwebdriver.chrome.driver=chromedriver.exe' '-Dwebdriver.ie.driver=IEDriverServer.exe'
-	
+	java -jar selenium-server-standalone-3.0.1.jar -role node -role ${ROLE} -hubHost ${HUB_IP} -hubPort ${HUB_PORT} '-browser browserName=internet explorer,maxInstances=5' '-Dwebdriver.chrome.driver=chromedriver.exe' '-Dwebdriver.ie.driver=IEDriverServer.exe'
 }
 else
 {
