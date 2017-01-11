@@ -6,17 +6,26 @@
 #    instance, and Nodes are registered to it and run browser-based tests
 ###
 function launch-selenium-server(){
+    ROLE=$1 #"hub" or "node"
+    SYSTEM=$2 #Must be the name of one of the subdirectories of selenium/driver; specifies the type of system for a node
+
     HUB_IP=192.168.33.11 # This should be the same as the IP address configured in the private_network configuration line of Vagrantfile
     HUB_PORT=4444 # 4444 is the default port for the server to listen on and shouldn't need to be changed
+
     DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd ) # The directory in which this script file is stored
 
-    ROLE=$1
     if [ "$ROLE" == "hub" ]; then
         NODE_ARGS=""
         DRIVERS=""
     elif [ "$ROLE" == "node" ]; then
+        DRIVER_PATH=${DIR}/driver/${SYSTEM} # The directory in which browser driver executables are stored (used when launching a node instance)
+        if [ ! -d "${DRIVER_PATH}" ]; then
+            echo "${SYSTEM} is not a valid system - path ${DRIVER_PATH} does not exist"
+        fi
+
+        #NODE_ARGS="-hubHost ${HUB_IP} -hubPort ${HUB_PORT} -browser browserName=safari"
         NODE_ARGS="-hubHost ${HUB_IP} -hubPort ${HUB_PORT}"
-        DRIVERS="-Dwebdriver.gecko.driver=${DIR}/geckodriver_mac.exe"
+        DRIVERS="-Dwebdriver.gecko.driver=${DRIVER_PATH}/geckodriver.exe -Dwebdriver.chrome.driver=${DRIVER_PATH}/chromedriver.exe "
 	else
 	    echo "launch-selenium-server() must be passed 'hub' or 'node' as 1st argument"
 	    return 1
