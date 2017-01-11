@@ -16,19 +16,23 @@ default:
       # This should be the base URL of the application you are testing.
       base_url: http://www.wikipedia.org
 
+      # You shouldn't override this default value - instead, use one of the profiles
+      # defined below, or add a new profile if a capability is desired that isn't
+      # included
+      #
+      # Legal "browser_name" values can be found in
+      # vendor/instaclick/php-webdriver/lib/WebDriver/Browser.php
+      # Legal values are:
+      # android, chrome, firefox, htmlunit, internet explorer, iPhone, iPad,
+      # opera, phantomjs, safari
+      browser_name: firefox
+
       # Configuration for the Goutte headless browser
       goutte: ~
 
       # Configuration for the Selenium2 driver, which runs in-browser tests.
       selenium2:
         capabilities:
-          # Legal "browser" values can be found in
-          # vendor/instaclick/php-webdriver/lib/WebDriver/Browser.php
-          # Legal values are:
-          # android, chrome, firefox, htmlunit, internet explorer, iPhone, iPad,
-          # opera, phantomjs, safari
-          browser: "firefox"
-
           # Legal "platform" values can be found at
           # https://selenium.googlecode.com/svn/trunk/docs/api/java/org/openqa/selenium/Platform.html
           #
@@ -44,5 +48,55 @@ default:
           # ANDROID - The Android mobile device OS
           platform: "ANY"
 
-          # The version of the browser to be tested.
-          version: "ANY"
+
+# System specific profiles
+#
+# Run Behat using one profile like "vendor/bin/behat -profile <profileName"
+#
+windows_firefox:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "firefox"
+            selenium2:
+                capabilities:
+                    platform: "WINDOWS"
+
+windows_internet_explorer:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "internet explorer"
+            selenium2:
+                capabilities:
+                    platform: "WINDOWS"
+
+windows_chrome:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "chrome"
+            selenium2:
+                capabilities:
+                    platform: "WINDOWS"
+
+osx_safari:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "safari"
+            selenium2:
+                capabilities:
+                    platform: "MAC"
+
+osx_firefox:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "firefox"
+            selenium2:
+                capabilities:
+                    platform: "MAC"
+
+osx_chrome:
+    extensions:
+        Behat\MinkExtension:
+            browser_name: "chrome"
+            selenium2:
+                capabilities:
+                    platform: "MAC"
