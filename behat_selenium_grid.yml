@@ -66,13 +66,16 @@ windows_chrome: # @SeleniumGrid
                 capabilities:
                     platform: "WINDOWS"
 
-osx_safari: # @SeleniumGrid
-    extensions:
-        Behat\MinkExtension:
-            browser_name: "safari"
-            selenium2:
-                capabilities:
-                    platform: "MAC"
+###
+# Safari is not currently supported because of the relative difficulty of getting Selenium to work with Safari.
+#
+# osx_safari: # @SeleniumGrid
+#     extensions:
+#         Behat\MinkExtension:
+#             browser_name: "safari"
+#             selenium2:
+#                 capabilities:
+#                     platform: "MAC"
 
 osx_firefox: # @SeleniumGrid
     extensions:
