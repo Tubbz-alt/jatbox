@@ -14,8 +14,8 @@ source ${DIR}/_common
 # Param 1: A browser argument like "-browser browserName=chrome,maxInstances=3 -browser browserName=firefox,maxInstances=3"
 BROWSER=$1
 if [[ "$BROWSER" == "" ]]; then
-    echo "Missing browser definition - eg \`node \"-browser browserName=chrome\"\`";
-    exit 1;
+    echo "Missing browser definition - eg \`node \"-browser browserName=chrome\"\`. Defaulting to Firefox and Chrome";
+    BROWSER="-browser browserName=chrome -browser browserName=firefox";
 fi
 
 # Determine what system we are running in. We currently don't test for 32 vs 64 bit systems - we just assume Mac is 64
