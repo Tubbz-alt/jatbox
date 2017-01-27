@@ -1,8 +1,21 @@
 # The default profile is used if no profile is specified when running Behat, and
 # all other profiles inherit its values unless they are overridden.
 default:
+
+  # Uncomment this to define a folder, all the files in which will be autoloaded. This is useful if, for example,
+  # you want to load your Context classes from a different path than the default
+  # autoload:
+  # - /path/to/folder/
+  # - %paths.base%/relative/path
+
   suites:
     default:
+
+      # Uncomment this to define a custom set of features directories
+      # paths:
+      #  - /path/to/features
+      # - %paths.base%/relative/path/to/features
+
       contexts:
         - FeatureContext:
             # Values defined by "parameters" are passed in an array to the constructor
