@@ -1,4 +1,6 @@
 {
+    "name": "pnnl/jatbox",
+
     "require": {
         "behat/behat": "^3.3",
         "behat/mink-extension": "^2.2",
