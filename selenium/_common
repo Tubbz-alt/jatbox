@@ -6,7 +6,7 @@ function _launch-selenium-server(){
     JAVA_ARGS=$1
     SELENIUM_ARGS=$2
 
-    COMMAND_TO_EXECUTE="java ${JAVA_ARGS} -jar ${DIR}/selenium-server-standalone-3.0.1.jar ${SELENIUM_ARGS}"
+    COMMAND_TO_EXECUTE="nohup java ${JAVA_ARGS} -jar ${DIR}/selenium-server-standalone-3.0.1.jar ${SELENIUM_ARGS} > selenium_server.log 2>&1 &"
     echo "Launching Selenium Server: ${COMMAND_TO_EXECUTE}"
     eval ${COMMAND_TO_EXECUTE}
 }

@@ -80,4 +80,8 @@ Vagrant.configure(2) do |config|
     cd /vagrant; su ubuntu -c "composer install";
     echo "Done installing Behat project dependencies"
   SHELL
+
+  config.vm.provision "shell", run: "always", inline: <<-SHELL
+    /vagrant/selenium/hub
+  SHELL
 end
