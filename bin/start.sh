@@ -4,15 +4,15 @@
 # has been created to signal the script to end, but we bind it to the EXIT signal so that the script will clean up after
 # itself if it's terminated unexpectedly
 finish(){
+    rm -f ${STOP_FILE}
     vagrant halt
     pkill -f "selenium-server"
-    rm -f ${STOP_FILE}
 }
 trap finish EXIT
 
 # get the directory in which this script is stored
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-STOP_FILE=/tmp/jatbox_stop
+STOP_FILE=${DIR}/jatbox_stop
 cd ${DIR}/..
 
 # Start the VM that will run our tests
