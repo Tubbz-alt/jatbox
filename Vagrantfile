@@ -69,7 +69,11 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    sudo apt-get install -y php php-dev php-curl php-pear php-mbstring default-jre parallel
+    # Source our bash profile to give us access to functions (like
+    # replace_with_link()) that are defined there
+    source /vagrant/sysfiles/home/ubuntu/.bash_profile
+
+    apt-get install -y php php-dev php-curl php-pear php-mbstring default-jre apache2 libapache2-mod-php
 
     echo "Installing Composer..."
     curl -sS https://getcomposer.org/installer | php
@@ -79,6 +83,11 @@ Vagrant.configure(2) do |config|
     echo "Installing Behat project dependencies"
     cd /vagrant; su ubuntu -c "composer install";
     echo "Done installing Behat project dependencies"
+
+    echo "Copying files into VM"
+    replace_with_link /home/ubuntu/.bash_profile
+    replace_with_link /var/www
+    echo "Done copying files into VM"
   SHELL
 
   config.vm.provision "shell", run: "always", inline: <<-SHELL

@@ -21,7 +21,7 @@ vagrant up
 # Start the local Selenium node for running local tests
 selenium/node &
 
-open index.html
+open http://192.168.33.11/
 
 # Don't end this script until the stop file has been put into place
 while [ ! -f ${STOP_FILE} ] ; do
