@@ -2,4 +2,6 @@
 /**
  * Call this script to stop the Vagrant server
  */
-$res = shell_exec('/vagrant/bin/stop.sh');
+shell_exec('/vagrant/bin/stop.sh');
+
+echo "System is halting. You may close this window.";

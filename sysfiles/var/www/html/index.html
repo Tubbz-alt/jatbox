@@ -3,20 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>JAT-Box</title>
-    <script>
-        function ajax(url) {
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.open("GET", url, true);
-            xmlhttp.send();
-        }
-    </script>
 </head>
 <body>
     <h1>Welcome to the JAT-Box test center</h1>
     <ul>
-        <li><a href="">Start tests</a></li>
-        <li><a href="">View output of last test</a></li>
-        <li><a href="javascript:ajax('stop.php')">Stop VM</a></li>
+        <li><a href="run_behat_tests.php">Start tests</a></li>
+        <li><a href="stop.php">Stop VM</a></li>
     </ul>
 </body>
 </html>
