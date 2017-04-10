@@ -40,7 +40,7 @@ class Selenium {
 
     private static function validateSystem($system)
     {
-        $validSystems = [ self::SYS_LINUX_32, self::SYS_MAC_64, self::SYS_WIN_32 ];
+        $validSystems = array( self::SYS_LINUX_32, self::SYS_MAC_64, self::SYS_WIN_32 );
         if (!in_array($system, $validSystems)) {
             throw new \Exception("Unexpected system '$system'. Expected one of " . implode(',', $validSystems));
         }
