@@ -21,7 +21,7 @@
     chdir($WORKING_DIR);
 
     # If a rebuild was requested, destroy the VM before starting it
-    if ($argv[1] === 'rebuild') {
+    if (array_key_exists('1', $argv) && $argv[1] === 'rebuild') {
         do_exec('vagrant destroy -f');
     }
 
