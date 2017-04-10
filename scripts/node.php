@@ -10,7 +10,7 @@
 require_once('Selenium.php');
 
 # Param 1: A browser argument like "-browser browserName=chrome,maxInstances=3 -browser browserName=firefox,maxInstances=3"
-$browserArgs = $argv[1] ?: "-browser browserName=chrome -browser browserName=firefox";
+$browserArgs = array_key_exists('1', $argv) ? $argv[1] : "-browser browserName=chrome -browser browserName=firefox";
 
 # Determine what system we are running in. We currently don't test for 32 vs 64 bit systems - we just assume Mac is 64
 # bit, and Windows/Linux are 32. That's just a pragmatic decision - if there is a need we can add additional drivers
