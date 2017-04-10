@@ -20,6 +20,11 @@
 
     chdir($WORKING_DIR);
 
+    # If a rebuild was requested, destroy the VM before starting it
+    if ($argv[1] === 'rebuild') {
+        do_exec('vagrant destroy -f');
+    }
+
     # Start the VM that will run our tests
     do_exec('vagrant up');
 
