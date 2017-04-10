@@ -10,7 +10,7 @@ const OS_MAC = 3;
 
 // STOP_FILE - the path to a file that, if present, will trigger the JAT-Box VM to terminate and the Selenium
 // Node (if running) to be stopped
-const STOP_FILE = __DIR__ . '/jatbox_stop';
+const STOP_FILE = __DIR__ . '/../bin/jatbox_stop';
 
 /**
  * Determines what OS family the script is running in
@@ -38,5 +38,14 @@ function do_exec ($command) {
     {
         echo fread($p, 4096);
         @ flush();
+    }
+}
+
+function exec_in_background($cmd) {
+    if (substr(php_uname(), 0, 7) == "Windows"){
+        pclose(popen("start /B ". $cmd, "r"));
+    }
+    else {
+        exec($cmd . " > /dev/null &");
     }
 }

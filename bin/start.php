@@ -23,8 +23,8 @@
     # Start the VM that will run our tests
     do_exec('vagrant up');
 
-//    # Start the local Selenium node for running local tests
-//    include (WORKING_DIR . '/selenium/node.php');
+    # Start the local Selenium node for running local tests
+    do_exec("php $WORKING_DIR/scripts/node.php");
 
     if (get_os() == OS_WIN) {
         do_exec('cmd /c start http://192.168.33.11/');
