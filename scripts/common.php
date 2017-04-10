@@ -9,8 +9,8 @@ const OS_LINUX = 2;
 const OS_MAC = 3;
 
 // STOP_FILE - the path to a file that, if present, will trigger the JAT-Box VM to terminate and the Selenium
-// Node (if running) to be stopped
-const STOP_FILE = __DIR__ . '/../bin/jatbox_stop';
+// Node (if running) to be stopped (define() used instead of const for PHP 5.3/5.4 support.
+define('STOP_FILE', __DIR__ . '/../bin/jatbox_stop');
 
 /**
  * Determines what OS family the script is running in
