@@ -91,6 +91,6 @@ Vagrant.configure(2) do |config|
   SHELL
 
   config.vm.provision "shell", run: "always", inline: <<-SHELL
-    /vagrant/selenium/hub
+    /vagrant/scripts/hub.php
   SHELL
 end
