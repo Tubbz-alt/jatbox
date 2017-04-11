@@ -33,6 +33,8 @@ function get_os () {
 }
 
 function do_exec ($command) {
+    echo "executing: $command";
+
     $p = popen($command, 'r');
     while (!feof($p))
     {

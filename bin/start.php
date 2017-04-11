@@ -15,7 +15,15 @@
 
         chdir($WORKING_DIR);
         do_exec('vagrant halt');
-        do_exec('pkill -f "selenium-server"');
+
+        // This portion kills the Selenium Node's Java process. Since that is running in the client, we have to check
+        // whether it's running in Windows and execute the PowerShell equivalent of pkill if so.
+        if (get_os() == OS_WIN) {
+            // TODO: This will kill any other Java processes that the user might be running - we should be getting the PID of the process
+            do_exec('kill -name java -Force');
+        } else {
+            do_exec('pkill -f "selenium-server"');
+        }
     });
 
     chdir($WORKING_DIR);
