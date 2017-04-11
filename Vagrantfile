@@ -12,7 +12,7 @@ Vagrant.configure(2) do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/xenial64"
+  config.vm.box = "bento/ubuntu-16.10-i386"
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -71,7 +71,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "shell", inline: <<-SHELL
     # Source our bash profile to give us access to functions (like
     # replace_with_link()) that are defined there
-    source /vagrant/sysfiles/home/ubuntu/.bash_profile
+    source /vagrant/sysfiles/home/vagrant/.bash_profile
 
     apt-get install -y php php-dev php-curl php-pear php-mbstring default-jre apache2 libapache2-mod-php
 
@@ -81,11 +81,11 @@ Vagrant.configure(2) do |config|
     echo "Done installing Composer..."
 
     echo "Installing Behat project dependencies"
-    cd /vagrant; su ubuntu -c "composer install";
+    cd /vagrant; su vagrant -c "composer install";
     echo "Done installing Behat project dependencies"
 
     echo "Copying files into VM"
-    replace_with_link /home/ubuntu/.bash_profile
+    replace_with_link /home/vagrant/.bash_profile
     replace_with_link /var/www
     echo "Done copying files into VM"
   SHELL
