@@ -15,28 +15,25 @@ class Selenium {
 
     private static function launchSeleniumServer ($javaArgs, $seleniumArgs)
     {
-        self::assertSeleniumServerNotAlreadyRunning();
+        # Cleanup function that runs when this script exits. Normally this will be after the stop file (see the loop at bottom)
+        # has been created to signal the script to end, but we bind it to run on exit so that the script will clean up after
+        # itself if it's terminated unexpectedly
+        register_shutdown_function(function () {
+            if (get_os() == OS_WIN) {
+                // TODO: This will kill any other Java processes that the user might be running - we should be getting the PID of the process
+                do_exec('kill -name java -Force');
+            } else {
+                do_exec('pkill -f "selenium-server"');
+            }
+        });
+
+
         $DIR = __DIR__;
         $COMMAND_TO_EXECUTE="java $javaArgs -jar $DIR/../selenium/selenium-server-standalone-3.0.1.jar $seleniumArgs > selenium_server.log";
         echo "Launching Selenium Server: $COMMAND_TO_EXECUTE";
         exec_in_background($COMMAND_TO_EXECUTE);
     }
 
-    private static function assertSeleniumServerNotAlreadyRunning ()
-    {
-        if (get_os() == OS_WIN) {
-            $filterResult = `get-WmiObject win32_process -Filter "name like '%java.exe'" | select CommandLine`;
-            $isRunning = !$filterResult || `-Not "$filterResult".Contains("selenium-server-standalone-3.0.1.jar -role node")`;
-        } else {
-            // $jobCount will be 1 if Selenium Server is already running on this machine
-            $jobCount = `ps -f | grep java.*jar.*selenium-server.* | grep -v grep | wc -l`;
-            $isRunning = $jobCount > 0;
-        }
-
-        if ($isRunning) {
-            throw new \Exception('Error: Selenium server is already running on this machine.');
-        }
-    }
 
     private static function validateSystem($system)
     {
